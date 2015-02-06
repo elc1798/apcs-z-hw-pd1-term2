@@ -9,17 +9,17 @@ public class Fibonacci {
 	 * fib(1) -> 1 
 	 */
 	
-	public static int fib_helper(int n , int prevprev , int prev , int currNum) {
+	public static int fib_helper(int n , int prevprev , int prev) {
 		//Count upwards
 		if (n == 0) {
-			return currNum;
+			return prevprev;
 		} else {
-			return fib_helper(n - 1, prev , prevprev + prev , prevprev + prev);
+			return fib_helper(n - 1 , prev , prevprev + prev);
 		}
 	}
 	
 	public static int fib(int n) {
-		return fib_helper(n , 0 , 1 , 0);
+		return fib_helper(n , 0 , 1);
 	}
 	
 	public static void main(String[] args) {
