@@ -1,3 +1,8 @@
 # Eclipse Workspace
 
 .project/
+
+# Java Compiled Files
+
+*.jar
+*.class
