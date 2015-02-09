@@ -25,16 +25,27 @@ public class Node {
         return parent;
     }
 
-    public Node destructor {
+    public Node checker() {
         //Call destructor if isFinish is true
         if (parent == null) {
             return null;
         }
         if (!parent.isStart) {
-            return parent.destructor();
+            return parent.checker();
             parent = null;
         } else {
             return this;
         }
+    }
+
+    public void destructor() {
+        if (parent != null) {
+            parent.destructor();
+            parent = null;
+        }
+    }
+
+    public ArrayList<Node> getPath() {
+
     }
 }
