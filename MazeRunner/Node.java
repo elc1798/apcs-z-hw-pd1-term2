@@ -32,7 +32,6 @@ public class Node {
         }
         if (!parent.isStart) {
             return parent.checker();
-            parent = null;
         } else {
             return this;
         }
