@@ -1,0 +1,9 @@
+Path Finding
+Search:
+    Blind Search : Brute force systematically
+        Depth First Search : Go down entire path before backtracking
+        Breadth First Search : Look at circle with radius r= (0 , infinity) away
+        for answer
+        State Space Search :
+            State : state of the world as it is
+
