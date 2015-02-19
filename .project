@@ -3,7 +3,6 @@
 	<name>apcs-z-hw-pd1-term2</name>
 	<comment></comment>
 	<projects>
-		<project>DefaultBuffer</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>
