@@ -65,7 +65,7 @@ public class KnightsTour {
         test.setup(0 , 0);
         test.fancyPrint();
         System.out.println("Starting solver...");
-        test.step_no_heuristic(0 , 1);
+        test.step_no_heuristic(0 , 0);
         System.out.println("========== END ==========");
         test = null;
         test = new KnightsTour();
