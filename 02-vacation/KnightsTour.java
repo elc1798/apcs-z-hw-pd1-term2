@@ -38,7 +38,7 @@ public class KnightsTour {
 
 	public void solve(int r , int c) {
 		if (nummoves >= board.length * board.length) { // Board is filled
-			return;
+            return;
 		} else if (r < 0 || c < 0 || r >= board.length || c >= board.length) { // Out of bounds
 			return;
 		} else if (board[r][c] != blank) { // Already visited
@@ -94,8 +94,8 @@ public class KnightsTour {
     public void cycleThrough() {
         for (int i = 0; i < board.length && nummoves < board.length * board.length; i++) {
             fillBlank();
-            solve(i , 0);
             nummoves = 0;
+            solve(i , 0);
         }
         if (nummoves < board.length * board.length) {
             System.out.println("No solution found.");
