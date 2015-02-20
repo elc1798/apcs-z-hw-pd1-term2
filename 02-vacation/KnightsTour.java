@@ -84,7 +84,7 @@ public class KnightsTour {
         solve(r - 1 , c + 2);
         solve(r - 1 , c - 2);
         solve(r + 1 , c + 2);
-        solve(r + 2 , c - 2);
+        solve(r + 1 , c - 2);
     }
 
     public void enableHeuristics() {
