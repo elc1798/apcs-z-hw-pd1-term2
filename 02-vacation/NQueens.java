@@ -91,8 +91,23 @@ public class NQueens {
         }
     }
 
+    public void cycleThrough() {
+        for (int i = 0; i < board.length && numplaced < board.length; i++) {
+            fillBlank();
+            solve(i , 0);
+        }
+        if (numplaced < board.length) {
+            System.out.println("No solution found");
+        }
+    }
+
     public static void main(String[] args) {
-        NQueens nq = new NQueens(8);
-        nq.solve(0 , 0);
+        NQueens nq;
+        for (int i = 1; i < 9; i++) {
+            nq = new NQueens(i);
+            nq.cycleThrough();
+            HWUTIL.sleep(5000);
+            nq = null;
+        }
     }
 }
