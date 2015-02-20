@@ -37,8 +37,8 @@ public class KnightsTour {
 	}
 
 	public void solve(int r , int c) {
-		if (nummoves > board.length * board.length) { // Board is filled
-			return;
+		if (nummoves >= board.length * board.length) { // Board is filled
+			System.exit(0);
 		} else if (r < 0 || c < 0 || r >= board.length || c >= board.length) { // Out of bounds
 			return;
 		} else if (board[r][c] != blank) { // Already visited
@@ -54,7 +54,7 @@ public class KnightsTour {
             } else {
 			    no_heuristic(r , c);
             }
-			if (nummoves <= board.length * board.length) { // Not solved :(
+			if (nummoves < board.length * board.length) { // Not solved :(
 				nummoves--; // Decrement the number of moves since not right path after all branches were cycled
 				board[r][c] = blank; // Reset the board
 				return;
