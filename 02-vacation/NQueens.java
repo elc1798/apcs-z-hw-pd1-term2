@@ -5,7 +5,7 @@ public class NQueens {
 
     private char[][] board;
     private int numplaced = 0;
-    
+
     private void fillBlank() {
         for (int i = 0; i < board.length; i++) {
             for (int k = 0; k < board[i].length; k++) {

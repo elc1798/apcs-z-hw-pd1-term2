@@ -48,7 +48,7 @@ public class Brancher {
         for (int[] coor : toCheck) {
             System.out.println(new Brancher(coor[0] , coor[1] , board).numChildren());
         }
-        */
+         */
         return toCheck;
     }
 

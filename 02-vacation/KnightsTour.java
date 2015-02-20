@@ -4,63 +4,63 @@ public class KnightsTour {
 
     public static final int blank = -1;
 
-	private int[][] board;
-	private int nummoves = 0;
+    private int[][] board;
+    private int nummoves = 0;
     private boolean useHeuristic = false;
 
-	private void fillBlank() {
-		for (int i = 0; i < board.length; i++) {
-			for (int k = 0; k < board[i].length; k++) {
-				board[i][k] = blank;
-			}
-		}
-	}
+    private void fillBlank() {
+        for (int i = 0; i < board.length; i++) {
+            for (int k = 0; k < board[i].length; k++) {
+                board[i][k] = blank;
+            }
+        }
+    }
 
-	public KnightsTour() {
-		board = new int[8][8];
-		fillBlank();
-	}
+    public KnightsTour() {
+        board = new int[8][8];
+        fillBlank();
+    }
 
-	public KnightsTour(int n) {
-		board = new int[n][n];
-		fillBlank();
-	}
+    public KnightsTour(int n) {
+        board = new int[n][n];
+        fillBlank();
+    }
 
-	public void fancyPrint() {
-		HWUTIL.clear();
-		for (int i = 0; i < board.length; i++) {
-			for (int k = 0; k < board[i].length; k++) {
-				System.out.printf(" | %2d " , board[i][k]);
-			}
-			System.out.printf("|\n");
-		}
-	}
+    public void fancyPrint() {
+        HWUTIL.clear();
+        for (int i = 0; i < board.length; i++) {
+            for (int k = 0; k < board[i].length; k++) {
+                System.out.printf(" | %2d " , board[i][k]);
+            }
+            System.out.printf("|\n");
+        }
+    }
 
-	public void solve(int r , int c) {
-		if (nummoves >= board.length * board.length) { // Board is filled
+    public void solve(int r , int c) {
+        if (nummoves >= board.length * board.length) { // Board is filled
             return;
-		} else if (r < 0 || c < 0 || r >= board.length || c >= board.length) { // Out of bounds
-			return;
-		} else if (board[r][c] != blank) { // Already visited
-			return;
-		} else { // OK to move
-			board[r][c] = nummoves; // Use move number as indicator so we can see all the steps
-			nummoves++; // Increment the move number
-			HWUTIL.sleep(100); // 0.1 second delay between moves
-			fancyPrint(); // Show move
-			// Call all possible moves:
+        } else if (r < 0 || c < 0 || r >= board.length || c >= board.length) { // Out of bounds
+            return;
+        } else if (board[r][c] != blank) { // Already visited
+            return;
+        } else { // OK to move
+            board[r][c] = nummoves; // Use move number as indicator so we can see all the steps
+            nummoves++; // Increment the move number
+            HWUTIL.sleep(100); // 0.1 second delay between moves
+            fancyPrint(); // Show move
+            // Call all possible moves:
             if (useHeuristic) {
                 generate_heuristic(r , c);
             } else {
-			    no_heuristic(r , c);
+                no_heuristic(r , c);
             }
-			if (nummoves < board.length * board.length) { // Not solved :(
-				nummoves--; // Decrement the number of moves since not right path after all branches were cycled
-				board[r][c] = blank; // Reset the board
-				return;
-			}
-		}
-	}
+            if (nummoves < board.length * board.length) { // Not solved :(
+                nummoves--; // Decrement the number of moves since not right path after all branches were cycled
+                board[r][c] = blank; // Reset the board
+                return;
+            }
+        }
+    }
 
     public void generate_heuristic(int r , int c) {
         /*
@@ -73,7 +73,7 @@ public class KnightsTour {
         for (int[] coor : moves) {
             solve(coor[0] , coor[1]);
         }
-               
+
     }
 
     public void no_heuristic(int r , int c) {
@@ -102,8 +102,8 @@ public class KnightsTour {
         }
     }
 
-	public static void main(String[] args) {
-		KnightsTour k;
+    public static void main(String[] args) {
+        KnightsTour k;
         for (int i = 1; i < 10; i++) {
             k = new KnightsTour(i);
             k.enableHeuristics();
@@ -111,6 +111,6 @@ public class KnightsTour {
             HWUTIL.sleep(3000);
             k = null;
         }
-	}
+    }
 
 }

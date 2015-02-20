@@ -44,7 +44,7 @@ public class FifteenPuzzle {
             } catch(Exception e) {
                 i--;
             }
-            
+
         }
     }
 
@@ -96,7 +96,7 @@ public class FifteenPuzzle {
             solve(targetX - 1 , targetY);
             solve(targetX , targetY + 1);
             solve(targetX , targetY - 1);
-       }
+        }
     }
 
     public FifteenPuzzle() {
@@ -109,7 +109,7 @@ public class FifteenPuzzle {
         FifteenPuzzle p = new FifteenPuzzle();
         p.fancyPrint();
         p.solve(p.blankX + 1 , p.blankY);    
-    
+
     }
 
 }
