@@ -103,9 +103,14 @@ public class NQueens {
 
     public static void main(String[] args) {
         NQueens nq;
-        for (int i = 1; i < 9; i++) {
+        long startTime;
+        long runTime;
+        for (int i = 1; i < 10; i++) {
             nq = new NQueens(i);
+            startTime = System.currentTimeMillis();
             nq.cycleThrough();
+            runTime = System.currentTimeMillis() - startTime;
+            System.out.println("Solved in " + runTime + " ms.");
             HWUTIL.sleep(5000);
             nq = null;
         }

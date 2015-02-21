@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class KnightsTour {
 
@@ -7,6 +8,8 @@ public class KnightsTour {
     private int[][] board;
     private int nummoves = 0;
     private boolean useHeuristic = false;
+
+    public boolean showSteps = false;
 
     private void fillBlank() {
         for (int i = 0; i < board.length; i++) {
@@ -46,8 +49,12 @@ public class KnightsTour {
         } else { // OK to move
             board[r][c] = nummoves; // Use move number as indicator so we can see all the steps
             nummoves++; // Increment the move number
-            HWUTIL.sleep(100); // 0.1 second delay between moves
-            fancyPrint(); // Show move
+
+            if (showSteps) {
+                HWUTIL.sleep(100); // 0.1 second delay between moves
+                fancyPrint(); // Show move
+            }
+
             // Call all possible moves:
             if (useHeuristic) {
                 generate_heuristic(r , c);
@@ -104,10 +111,28 @@ public class KnightsTour {
 
     public static void main(String[] args) {
         KnightsTour k;
-        for (int i = 1; i < 10; i++) {
+        long startTime;
+        long runTime;
+        boolean show = false;
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Show all steps? This will slow down the runtime.\n(Y/N): ");
+        if (sc.nextLine().toUpperCase().startsWith("Y")) {
+            show = true;
+        }
+
+        for (int i = 5; i < 10; i++) {
             k = new KnightsTour(i);
             k.enableHeuristics();
+            if (show) {
+                k.showSteps = true;
+            }
+            startTime = System.currentTimeMillis();
             k.cycleThrough();
+            runTime = System.currentTimeMillis() - startTime;
+            if (!show) { // Print out final solution if not showing all steps
+                k.fancyPrint();
+            }
+            System.out.println("Solved in " + runTime + " ms.");
             HWUTIL.sleep(3000);
             k = null;
         }
