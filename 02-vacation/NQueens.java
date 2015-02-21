@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class NQueens {
 
     private final char blank = ' ';
@@ -5,6 +7,8 @@ public class NQueens {
 
     private char[][] board;
     private int numplaced = 0;
+
+    public boolean show = false;
 
     private void fillBlank() {
         for (int i = 0; i < board.length; i++) {
@@ -60,11 +64,12 @@ public class NQueens {
         } else if (!checkSafe(r , c)) { // Queen intersects kill-path of another queen
             return;
         } else {
-
             board[r][c] = queen;
             numplaced++;
-            HWUTIL.sleep(100);
-            fancyPrint();
+            if (show) {
+                HWUTIL.sleep(100);
+                fancyPrint();
+            }
 
             /*
              * Apply soft heuristic first:
@@ -105,11 +110,22 @@ public class NQueens {
         NQueens nq;
         long startTime;
         long runTime;
+        boolean showSteps = false;
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Show all steps? This will slow down your runtime.\n(Y/N): ");
+        if (sc.nextLine().toUpperCase().startsWith("Y")) {
+            showSteps = true;
+        }
+        sc.close();
         for (int i = 1; i < 10; i++) {
             nq = new NQueens(i);
+            nq.show = false;
             startTime = System.currentTimeMillis();
             nq.cycleThrough();
             runTime = System.currentTimeMillis() - startTime;
+            if (!showSteps) {
+                nq.fancyPrint();
+            }
             System.out.println("Solved in " + runTime + " ms.");
             HWUTIL.sleep(5000);
             nq = null;

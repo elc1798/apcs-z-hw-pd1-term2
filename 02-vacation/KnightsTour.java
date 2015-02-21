@@ -119,7 +119,7 @@ public class KnightsTour {
         if (sc.nextLine().toUpperCase().startsWith("Y")) {
             show = true;
         }
-
+        sc.close();
         for (int i = 5; i < 10; i++) {
             k = new KnightsTour(i);
             k.enableHeuristics();
