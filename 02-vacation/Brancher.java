@@ -36,7 +36,7 @@ public class Brancher {
         return children;
     }
 
-    public ArrayList rank() {
+    public ArrayList<int[]> rank() {
         Collections.sort(toCheck , new Comparator<int[]>() {
             public int compare(int[] a , int[] b) {
                 Brancher b_a = new Brancher(a[0] , a[1] , board);
