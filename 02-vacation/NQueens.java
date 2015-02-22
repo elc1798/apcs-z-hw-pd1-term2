@@ -126,7 +126,7 @@ public class NQueens {
             warmup = null;
         }
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i <= 20; i++) {
             nq = new NQueens(i);
             nq.show = false;
             startTime = System.nanoTime();
