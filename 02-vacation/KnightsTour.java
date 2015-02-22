@@ -33,7 +33,7 @@ public class KnightsTour {
         HWUTIL.clear();
         for (int i = 0; i < board.length; i++) {
             for (int k = 0; k < board[i].length; k++) {
-                System.out.printf(" | %2d " , board[i][k]);
+                System.out.printf(" | %3d " , board[i][k]);
             }
             System.out.printf("|\n");
         }
@@ -120,19 +120,40 @@ public class KnightsTour {
             show = true;
         }
         sc.close();
-        for (int i = 5; i < 10; i++) {
+
+        /*
+         * Apparently JVM needs to warm up to give accurate time readings
+         * according to:
+         * http://stuq.nl/weblog/2009-01-28/why-many-java-performance-tests-are-wrong
+         */
+
+        // Warmup:
+        System.out.println("Warming up JVM...");
+        for (int i = 0; i < 8; i++) {
+            KnightsTour stressTester = new KnightsTour(8);
+            stressTester.enableHeuristics();
+            stressTester.solve(0 , 0);
+            stressTester = null;
+        }
+
+        // More accurate timing:
+        for (int i = 5; i <= 20; i++) {
             k = new KnightsTour(i);
             k.enableHeuristics();
             if (show) {
                 k.showSteps = true;
             }
-            startTime = System.currentTimeMillis();
+            startTime = System.nanoTime();
             k.cycleThrough();
-            runTime = System.currentTimeMillis() - startTime;
+            runTime = System.nanoTime() - startTime;
             if (!show) { // Print out final solution if not showing all steps
                 k.fancyPrint();
             }
-            System.out.println("Solved in " + runTime + " ms.");
+            System.out.println(i + "x" + i + " board");
+            // Convert to ms, preserve floating points:
+            String msVal = Long.toString(runTime);
+            msVal = msVal.substring(0 , msVal.length() - 6) + "." + msVal.substring(msVal.length() - 6);
+            System.out.println("Solved in " + msVal + " milliseconds.");
             HWUTIL.sleep(3000);
             k = null;
         }
