@@ -18,12 +18,12 @@ public class NQueens {
         }
     }
 
-    private NQueens() {
+    public NQueens() {
         board = new char[8][8];
         fillBlank();
     }
 
-    private NQueens(int boardsize) {
+    public NQueens(int boardsize) {
         board = new char[boardsize][boardsize];
         fillBlank();
     }
