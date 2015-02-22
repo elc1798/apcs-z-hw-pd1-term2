@@ -152,6 +152,9 @@ public class KnightsTour {
             System.out.println(i + "x" + i + " board");
             // Convert to ms, preserve floating points:
             String msVal = Long.toString(runTime);
+            while (msVal.length() < 9) {
+                msVal = "0" + msVal;
+            }
             msVal = msVal.substring(0 , msVal.length() - 6) + "." + msVal.substring(msVal.length() - 6);
             System.out.println("Solved in " + msVal + " milliseconds.");
             HWUTIL.sleep(3000);

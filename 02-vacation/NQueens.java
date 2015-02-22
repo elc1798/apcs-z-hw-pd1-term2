@@ -117,16 +117,31 @@ public class NQueens {
             showSteps = true;
         }
         sc.close();
+
+        // Warmup JVM (See KnightsTour.java for explanation)
+
+        for (int i = 0; i < 10; i++) {
+            NQueens warmup = new NQueens(8);
+            warmup.cycleThrough();
+            warmup = null;
+        }
+
         for (int i = 1; i < 10; i++) {
             nq = new NQueens(i);
             nq.show = false;
-            startTime = System.currentTimeMillis();
+            startTime = System.nanoTime();
             nq.cycleThrough();
-            runTime = System.currentTimeMillis() - startTime;
+            runTime = System.nanoTime() - startTime;
+            String msVal = Long.toString(runTime);
+            while (msVal.length() < 7) {
+                msVal = "0" + msVal;
+            }
+            msVal = msVal.substring(0 , msVal.length() - 6) + "." + msVal.substring(msVal.length() - 6);
             if (!showSteps) {
                 nq.fancyPrint();
             }
-            System.out.println("Solved in " + runTime + " ms.");
+            System.out.println(i + "x" + i + " board.");
+            System.out.println("Solved in " + msVal + " ms.");
             HWUTIL.sleep(5000);
             nq = null;
         }
