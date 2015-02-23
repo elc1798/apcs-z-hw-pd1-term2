@@ -1,0 +1,217 @@
+**********************************************************************
+                           BRONZE PROBLEMS
+**********************************************************************
+                  Three problems numbered 11 through 13
+**********************************************************************
+
+Problem 11: Statistics [Traditional, 2008]
+
+The cows have enrolled in elementary statistics and are having a tough time
+with their homework. Please help them.
+
+Given a set of N (1 <= N <= 500) numbers, X_i (-5,000 <= X_i <= 5000),
+calculate two statistics:
+     * The mean (sum of the numbers divided by N)
+     * The median (if N is odd, the middle number when the N numbers
+       are sorted; if N is even, the mean of the two middle numbers
+       when the N numbers are sorted)
+
+Your answer will be considered correct if it is within 0.002 of the
+official answer.
+
+PROBLEM NAME: stats
+
+INPUT FORMAT:
+
+* Line 1: A single integer: N
+
+* Lines 2..N+1: Line i+1 contains a single integer: X_i
+
+SAMPLE INPUT (file stats.in):
+
+5
+12
+4
+6
+8
+2
+
+OUTPUT FORMAT:
+
+* Line 1: The mean of the input set
+
+* Line 2: The median of the input set
+
+SAMPLE OUTPUT (file stats.out):
+
+6.400000
+6.000000
+
+OUTPUT DETAILS:
+
+(12+4+6+8+2)/5=6.4
+Middle number of the set {2, 4, 6, 8, 12} is 6
+
+**********************************************************************
+
+Problem 12: Lake Making [Rob Kolstad, 2008]
+
+Farmer John wants his cows to help him make a lake. He has mapped
+the pasture where he wants to build the lake by creating a R (3 <=
+R <= 100) row by C (3 <= C <= 100) column grid of six foot by six
+foot squares and then by determining the average elevation (10 <=
+elev_rc <= 5000) in inches for each square.
+
+Additionally, he has trained the cows in "stomp digging". The burly
+bovines travel in a herd that just exactly covers a 3x3 grid of
+squares to a grid whose upper left coordinate is R_s,C_s (1 <= R_s
+<= R-2; 1 <= C_s <= C-2). The cows then stomp the ground to push
+it down D_s (1 <= D_s <= 40) inches. The cows are quite meticulous;
+the cows at lower elevations will not commence stomping until the
+rest of the herd has joined them. Thus, not all the 3x3 grid is
+necessarily stomped (or perhaps some part is stomped less than some
+other part).
+
+Given an initial set of elevations, an ordered set of N (1 <= N <=
+20000) stomp digging instructions, and an elevation E (0 <= E <=
+5000) for the lake's final water level, determine the volume of
+water (in cubic inches) that the lake will hold. It is guaranteed
+that the answer will not exceed 2,000,000,000.  Presume that the
+edge of the lake contains barriers so that water can not spill over
+the border.
+
+Consider a small 4 x 6 pasture to be turned into a lake. Its initial
+elevations (annotated with row/column numbers) are:
+
+                      column
+                  1  2  3  4  5  6
+         row 1:  28 25 20 32 34 36
+         row 2:  27 25 20 20 30 34
+         row 3:  24 20 20 20 20 30
+         row 4:  20 20 14 14 20 20
+
+Interpreting the map, we see a hill in the upper right corner that
+rises to elevation 36; a small hill also rises to elevation 28 in
+the upper left corner. The middle of row 4 has a slight depression.
+After the cow-stomping instruction "1 4 4", the pasture has these
+elevations:
+                  1  2  3  4  5  6
+         row 1:  28 25 20 32 32 32
+         row 2:  27 25 20 20 30 32
+         row 3:  24 20 20 20 20 30
+         row 4:  20 20 14 14 20 20
+
+Note that only three squares were stomped down. The other six sets
+of cows were waiting for the stompers to get to their level, which
+never happened.  After stomping down the upper left corner with
+this instruction "1 1 10", the pasture looks like this:
+
+                  1  2  3  4  5  6
+         row 1:  18 18 18 32 32 32
+         row 2:  18 18 18 20 30 32
+         row 3:  18 18 18 20 20 30
+         row 4:  20 20 14 14 20 20
+
+If the final elevation of the lake is to be 22 inches, the pasture
+has these depths:
+                  1  2  3  4  5  6
+         row 1:   4  4  4 -- -- --
+         row 2:   4  4  4  2 -- --
+         row 3:   4  4  4  2  2 --
+         row 4:   2  2  8  8  2  2
+
+for a total aggregated depth of 66. Calculate the volume by multiplying
+by 6 feet x 6 feet = 66 x 72 inches x 72 inches = 342,144 cubic
+inches.
+
+Write a program to automate this calculation.
+
+PROBLEM NAME: makelake
+
+INPUT FORMAT:
+
+* Line 1: Four space-separated integers: R, C, E, N
+
+* Lines 2..R+1: Line i+1 describes row of squares i with C
+        space-separated integers
+
+* Lines R+2..R+N+1: Line i+R+1 describes stomp-digging instruction i
+        with three integers: R_s, C_s, and D_s
+
+SAMPLE INPUT (file makelake.in):
+
+4 6 22 2
+28 25 20 32 34 36
+27 25 20 20 30 34
+24 20 20 20 20 30
+20 20 14 14 20 20
+1 4 4
+1 1 10
+
+INPUT DETAILS:
+
+As per the example from the text.
+
+OUTPUT FORMAT:
+
+* Line 1: A single integer that is the volume of the new lake in cubic
+        inches
+
+SAMPLE OUTPUT (file makelake.out):
+
+342144
+
+**********************************************************************
+
+Problem 13: Oh Those Rollers [Rob Kolstad, 2008]
+
+Farmer John has installed a new winch that gives him mechanical
+advantage when lifting bales of hay into the barn. The winch was
+manufactured by the Rube Goldberg Winch Company and has way too
+many rollers to make any sense at all. The winch has a huge steel
+plate with a number of rollers whose ultimate source of power is
+the drive-roller whose location FJ has denoted as the origin (0,0).
+This roller drives a roller that drives another roller, etc. etc.
+until the final roller is driven. FJ is trying to find that final
+roller and wants to know which one it is.
+
+FJ has recorded the x_i,y_i (-5,000 <= x_i <= 5,000; -5,000 <= y_i
+<= 5,000) coordinates and the radius r_i (3 <= r_i <= 1024) of each
+of the N (2 <= N <= 1080) rollers. Tell him the x,y coordinate of
+the last roller in the chain (the roller that is driven but drives
+no other roller). Every roller except the drive-roller is driven
+by exactly one other roller.
+
+PROBLEM NAME: rollers
+
+INPUT FORMAT:
+
+* Line 1: A single integer: N
+
+* Lines 2..N+1: Line i+1 describes roller i with three space separated
+        integers: x_i, y_i, and r_i
+
+SAMPLE INPUT (file rollers.in):
+
+3
+0 0 30
+30 40 20
+-15 100 55
+
+INPUT DETAILS:
+
+Three rollers. First is at the origin with radius 30. It drives the roller
+at (30,40) whose radius is 20. That roller in turn drives the third roller
+located at (-15,100) with radius 55.
+
+OUTPUT FORMAT:
+
+* Line 1: A single line with two space-separated integers that are
+        respectively the x,y coordinates of the last roller in the
+        chain of driven rollers.
+
+SAMPLE OUTPUT (file rollers.out):
+
+-15 100
+
+**********************************************************************
