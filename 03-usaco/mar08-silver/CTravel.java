@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class CTravel {
 
@@ -28,10 +29,10 @@ public class CTravel {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
-        String[] line = br.readLine().split("\\s+");
-
-        maze = new char[Integer.parseInt(line[0])][Integer.parseInt(line[1])];
-        seconds = Integer.parseInt(line[2]);
+        String line = br.readLine();
+	StringTokenizer st = new StringTokenizer(line);
+        maze = new char[Integer.parseInt(st.nextToken())][Integer.parseInt(st.nextToken())];
+        seconds = Integer.parseInt(st.nextToken());
 
         String s;
         for (int i = 0; i < maze.length; i++) {
@@ -41,11 +42,12 @@ public class CTravel {
             }
         }
 
-        line = br.readLine().split("+\\s");
+        line = br.readLine();
+	st = new StringTokenizer(line);
 //        maze[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = me;
-        maze[Integer.parseInt(line[2])][Integer.parseInt(line[3])] = finish;
-        startX = Integer.parseInt(line[0]);
-        startY = Integer.parseInt(line[1]);
+        startX = Integer.parseInt(st.nextToken());
+        startY = Integer.parseInt(st.nextToken());
+        maze[Integer.parseInt(st.nextToken()) - 1][Integer.parseInt(st.nextToken()) - 1] = finish;
     }
 
     public static void solve(int r , int c , int numsteps) {
