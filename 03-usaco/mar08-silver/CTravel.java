@@ -30,7 +30,7 @@ public class CTravel {
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
         String line = br.readLine();
-	StringTokenizer st = new StringTokenizer(line);
+        StringTokenizer st = new StringTokenizer(line);
         maze = new char[Integer.parseInt(st.nextToken())][Integer.parseInt(st.nextToken())];
         seconds = Integer.parseInt(st.nextToken());
 
@@ -43,8 +43,8 @@ public class CTravel {
         }
 
         line = br.readLine();
-	st = new StringTokenizer(line);
-//        maze[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = me;
+        st = new StringTokenizer(line);
+        //        maze[Integer.parseInt(line[0])][Integer.parseInt(line[1])] = me;
         startX = Integer.parseInt(st.nextToken());
         startY = Integer.parseInt(st.nextToken());
         maze[Integer.parseInt(st.nextToken()) - 1][Integer.parseInt(st.nextToken()) - 1] = finish;
@@ -74,7 +74,14 @@ public class CTravel {
     }
 
     public static void process() {
+        for (int i = 0; i < maze.length; i++) {
+            System.out.println(Arrays.toString(maze[i]));
+        }
         solve(startX , startY , 0);
+        System.out.println();
+        for (int i = 0; i < maze.length; i++) {
+            System.out.println(Arrays.toString(maze[i]));
+        }
     }
 
     public static void writeout() throws IOException {
