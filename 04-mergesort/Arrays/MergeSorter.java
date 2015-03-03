@@ -45,21 +45,11 @@ public class MergeSorter {
     }
 
     public static int[] firstHalf(int[] a) {
-        int[] ARY = new int[a.length / 2];
-        for (int i = 0; i < ARY.length; i++) {
-            ARY[i] = a[i];
-        }
-        return ARY;
+        return Arrays.copyOfRange(a , 0 , a.length / 2);
     }
 
     public static int[] secondHalf(int[] a) {
-        int START = a.length / 2;
-        int[] ARY = new int[a.length - START];
-
-        for (int i = START; i < a.length; i++) {
-            ARY[i - START] = a[i];
-        }
-        return ARY;
+        return Arrays.copyOfRange(a , a.length / 2 , a.length);
     }
 
     public static int[] mergeSort(int[] a) {
@@ -68,8 +58,8 @@ public class MergeSorter {
 
     public static void main(String[] args) {
         Random r = new Random();
-        int[] test = new int[30];
-        for (int i = 0; i < 30; i++) {
+        int[] test = new int[100000];
+        for (int i = 0; i < 100000; i++) {
             test[i] = r.nextInt(100) - 50;
         }
         System.out.println("Original: " + Arrays.toString(test));
