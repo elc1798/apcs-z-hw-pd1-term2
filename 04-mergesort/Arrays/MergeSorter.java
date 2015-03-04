@@ -58,16 +58,25 @@ public class MergeSorter {
 
     public static void main(String[] args) {
         Random r = new Random();
-        int[] test = new int[100000];
-        for (int i = 0; i < 100000; i++) {
+        int size = 100000;
+        if (args.length > 0) {
+            try {
+                size = Integer.parseInt(args[0]);
+            } catch(Exception e) {}
+        }
+        int[] test = new int[size];
+        for (int i = 0; i < size; i++) {
             test[i] = r.nextInt(100) - 50;
         }
-        System.out.println("Original: " + Arrays.toString(test));
+//      System.out.println("Original: " + Arrays.toString(test));
+        System.out.println("Elements: " + test.length);
         long time = System.nanoTime();
         int[] sorted = mergeSort(test);
         time = System.nanoTime() - time;
-        System.out.println("Sorted: " + Arrays.toString(sorted));
-        System.out.println("Duration: " + time + " nanoseconds");
+        String strtime = Long.toString(time);
+        strtime = strtime.substring(0 , strtime.length() - 6) + "." + strtime.substring(strtime.length() - 6);
+//      System.out.println("Sorted: " + Arrays.toString(sorted));
+        System.out.println("Duration: " + strtime + " milliseconds");
     }
 
 }

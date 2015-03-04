@@ -1,7 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Collections;
 
 public class MergeSorterOptimized {
 
@@ -60,17 +59,24 @@ public class MergeSorterOptimized {
     }
 
     public static void main(String[] args) {
+        int size = 100000;
+        if (args.length > 0) {
+            try {
+                size = Integer.parseInt(args[0]);
+            } catch(Exception e) {}
+        }
         Random r = new Random();
         List<Integer> test = new ArrayList<Integer>();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < size; i++) {
             test.add(r.nextInt(100) - 50);
         }
-//        System.out.println("Original: " + test.toString());
+//      System.out.println("Original: " + test.toString());
+        System.out.println("Elements: " + test.size());
         long time = System.nanoTime();
         List<Integer> sorted = mergeSort(test);
         time = System.nanoTime() - time;
         String strtime = Long.toString(time);
-//        System.out.println("Sorted: " + sorted.toString());
+//      System.out.println("Sorted: " + sorted.toString());
         System.out.println("Duration: " +  strtime.substring(0 , strtime.length() - 6) + "." + strtime.substring(strtime.length() - 6) + " milliseconds");
     }
 
