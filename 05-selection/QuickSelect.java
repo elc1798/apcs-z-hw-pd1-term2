@@ -11,7 +11,7 @@ public class QuickSelect {
      *
      */
 
-    public static int select(int[] a , int k , int l , int h) {
+    private static int select(int[] a , int k , int l , int h) {
         if (h >= a.length) {
             h = a.length - 1;
         }
