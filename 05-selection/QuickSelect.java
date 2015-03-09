@@ -34,17 +34,16 @@ public class QuickSelect {
                     lower_bound++;
                 }
             }
-            pivotIndex = lower_bound;
-            for (int i = lower_bound; i <= higher_bound; i++) {
+            for (int i = Integer.valueOf(lower_bound); i <= higher_bound; i++) {
                 b[i] = pivot;
             }
             if (b[k] == pivot) {
                 return pivot;
             } else {
                 if (lower_bound > k) {
-                    return select(b , k , l , pivotIndex - 1);
+                    return select(b , k , l , lower_bound - 1);
                 } else {
-                    return select(b , k , pivotIndex + 1 , h);
+                    return select(b , k , lower_bound + 1 , h);
                 }
             }
         }

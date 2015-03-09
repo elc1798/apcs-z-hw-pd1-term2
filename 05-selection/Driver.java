@@ -28,6 +28,11 @@ public class Driver {
 
         System.out.println("Stress test: ");
         System.out.println(Arrays.toString(test_2));
+        System.out.println("Stress test solution: ");
+        int[] test_2_solution = new int[test_2.length];
+        System.arraycopy(test_2 , 0 , test_2_solution , 0 , test_2.length);
+        Arrays.sort(test_2_solution);
+        System.out.println(Arrays.toString(test_2_solution));
         for (int i = 0 ; i < test_2.length ; i++) {
             System.out.println(QuickSelect.select(test_2 , i));
         }
