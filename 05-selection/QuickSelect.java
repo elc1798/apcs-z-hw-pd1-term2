@@ -26,10 +26,10 @@ public class QuickSelect {
             int lower_bound = l;
             int higher_bound = h;
             for (int i = l; i <= h; i++) {
-                if (a[i] < pivot) {
+                if (a[i] > pivot) {
                     b[higher_bound] = a[i];
                     higher_bound--;
-                } else if (a[i] > pivot) {
+                } else if (a[i] < pivot) {
                     b[lower_bound] = a[i];
                     lower_bound++;
                 }
@@ -50,7 +50,7 @@ public class QuickSelect {
     }
 
     public static int select(int[] a , int k) {
-        return select(a , a.length - k - 1 , 0 , a.length - 1);
+        return select(a , k , 0 , a.length - 1);
     }
 
 }
