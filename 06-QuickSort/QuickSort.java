@@ -31,9 +31,8 @@ public class QuickSort {
                 b[i] = pivot;
             }
             System.arraycopy(b , 0 , a , 0 , a.length);
-            int k = Integer.valueOf(lower_bound);
             qsort(a , l , lower_bound - 1);
-            qsort(a , k + 1 , h);
+            qsort(a , lower_bound + 1 , h);
         }
     }
 
