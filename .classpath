@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="02-vacation"/>
+	<classpathentry kind="src" path="01-recursion"/>
+	<classpathentry kind="src" path="07-LinkedList"/>
+	<classpathentry kind="src" path="06-QuickSort"/>
+	<classpathentry kind="src" path="04-mergesort"/>
+	<classpathentry kind="src" path="03-usaco"/>
+	<classpathentry kind="src" path="notes"/>
+	<classpathentry kind="src" path="05-selection"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
