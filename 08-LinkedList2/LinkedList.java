@@ -17,22 +17,34 @@ public class LinkedList {
     }
 
     public void append(Node n) {
-        Node tmp = tail.copy();
-        n.setParent(tmp);
-        tmp.setDaughter(n);
-        tail = n;
-        length++;
+        if (head != null && tail != null) {
+            Node tmp = tail.copy();
+            n.setParent(tmp);
+            tmp.setDaughter(n);
+            tail = n;
+            length++;
+        } else {
+            head = n;
+            tail = n;
+            length = 1;
+        }
     }
 
     public void prepend(Node n) {
-        Node tmp = head.copy();
-        n.setDaughter(tmp);
-        tmp.setParent(n);
-        head = n;
-        length++;
+        if (head != null && tail != null) {
+            Node tmp = head.copy();
+            n.setDaughter(tmp);
+            tmp.setParent(n);
+            head = n;
+            length++;
+        } else {
+            head = n;
+            tail = n;
+            leangth = 1;
+        }
     }
 
-    public void rmNode(Node n) {
+    private void detach(Node n) {
         n.getParent().setDaughter(n.getDaughter());
         n.getDaughter().setParent(n.getParent());
         n.setParent(null);
@@ -40,7 +52,22 @@ public class LinkedList {
         length--;
     }
 
-    public void insert(int index) {
+    public void removeAt(int index) {
 
+    }
+
+    public void insert(Node n , int index) {
+        if (head != null && tail != null) {
+            Node tmp = n.copy();
+            Node movingHead = head;
+            for (int i = 0; i <= index - 1 && movingHead.getNext() != null; i++) {
+                tmp.setParent(movingHead);
+                movingHead = movingHead.getNext();
+            }
+            tmp.setDaughter(tmp.getParent().getDaughter);
+            tmp.getParent().setDaughter(tmp);
+        } else {
+            
+        }
     }
 }
