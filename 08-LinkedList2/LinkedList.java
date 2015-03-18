@@ -54,8 +54,8 @@ public class LinkedList {
 
     public void removeAt(int index) {
         Node tmp = head;
-        for (int i = 0; head != null && tail != null && i <= index  && movingHead.getNext() != null; i++) {
-            tmp = tmp.getNext();
+        for (int i = 0; head != null && tail != null && i <= index && tmp.getDaughter() != null; i++) {
+            tmp = tmp.getDaughter();
         }
         detach(tmp);
     }
@@ -64,11 +64,11 @@ public class LinkedList {
         if (head != null && tail != null) {
             Node tmp = n.copy();
             Node movingHead = head;
-            for (int i = 0; i <= index - 1 && movingHead.getNext() != null; i++) {
+            for (int i = 0; i <= index - 1 && movingHead.getDaughter() != null; i++) {
                 tmp.setParent(movingHead);
-                movingHead = movingHead.getNext();
+                movingHead = movingHead.getDaughter();
             }
-            tmp.setDaughter(tmp.getParent().getDaughter);
+            tmp.setDaughter(tmp.getParent().getDaughter());
             tmp.getParent().setDaughter(tmp);
         } else {
             head = n;

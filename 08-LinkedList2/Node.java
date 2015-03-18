@@ -6,7 +6,6 @@ public class Node {
     public Node() {
         daughter = null;
         parent = null;
-        associations = new LinkedList[0];
     }
 
     public void setDaughter(Node n) {
