@@ -40,7 +40,7 @@ public class LinkedList {
         } else {
             head = n;
             tail = n;
-            leangth = 1;
+            length = 1;
         }
     }
 
@@ -53,7 +53,11 @@ public class LinkedList {
     }
 
     public void removeAt(int index) {
-
+        Node tmp = head;
+        for (int i = 0; head != null && tail != null && i <= index  && movingHead.getNext() != null; i++) {
+            tmp = tmp.getNext();
+        }
+        detach(tmp);
     }
 
     public void insert(Node n , int index) {
@@ -67,7 +71,9 @@ public class LinkedList {
             tmp.setDaughter(tmp.getParent().getDaughter);
             tmp.getParent().setDaughter(tmp);
         } else {
-            
+            head = n;
+            tail = n;
+            length++;
         }
     }
 }
