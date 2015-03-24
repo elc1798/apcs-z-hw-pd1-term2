@@ -7,3 +7,7 @@
 *.jar
 *.class
 /bin
+
+# Vim swp files
+
+*.swp
