@@ -32,4 +32,12 @@ public class Stack<E> {
         return eap.getData();
     }
 
+    public E peek() {
+        if (eap.getNext() == null) {
+            return null;
+        } else {
+            return eap.getNext().getData();
+        }
+    }
+
 }

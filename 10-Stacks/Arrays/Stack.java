@@ -41,4 +41,11 @@ public class Stack<E> {
         return stack[0];
     }
 
+    public E peek() {
+        if (stack.length < 2) {
+            return null;
+        } else {
+            return stack[1];
+        }
+    }
 }
