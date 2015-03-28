@@ -16,17 +16,17 @@ public class Queue<E> {
     }
 
     public E dequeue() {
-        if (tail == null) {
+        if (head == null) {
             return null;
         } else {
-            Node<E> tmp = tail;
-            tail = tail.getParent();
+            Node<E> tmp = head;
+            head = head.getNext();
             return tmp.getData();
         }
     }
 
     public boolean empty() {
-        return head == null && tail == null;
+       return head == null;
     }
 
     public E head() {
