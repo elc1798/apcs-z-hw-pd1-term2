@@ -81,26 +81,14 @@ public class BFSMaze {
             Node iter1 = new Node(current.r + 1 , current.c);
             Node iter2 = new Node(current.r , current.c - 1);
             Node iter3 = new Node(current.r , current.c + 1);
-            Node iter4 = new Node(current.r - 1 , current.c - 1);
-            Node iter5 = new Node(current.r - 1 , current.c + 1);
-            Node iter6 = new Node(current.r + 1 , current.c - 1);
-            Node iter7 = new Node(current.r + 1 , current.c + 1);
             iter0.setParent(current);
             iter1.setParent(current);
             iter2.setParent(current);
             iter3.setParent(current);
-            iter4.setParent(current);
-            iter5.setParent(current);
-            iter6.setParent(current);
-            iter7.setParent(current);
             queue.add(iter0);
             queue.add(iter1);
             queue.add(iter2);
             queue.add(iter3);
-            queue.add(iter4);
-            queue.add(iter5);
-            queue.add(iter6);
-            queue.add(iter7);
         }
         return null;
     }
