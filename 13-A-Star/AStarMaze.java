@@ -117,6 +117,7 @@ public class AStarMaze {
             } else {
                 continue;
             }
+            open.loadLowestCost();
         }
         return null;
     }

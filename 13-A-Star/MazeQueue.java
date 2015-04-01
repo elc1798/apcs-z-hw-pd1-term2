@@ -4,12 +4,6 @@ import java.util.Comparator;
 public class MazeQueue {
 
     private Node[] q;
-    private static final Comparator<Node> nodeComp = new Comparator<Node>() {
-        @Override
-        public int compare(Node n1 , Node n2) {
-            return (int)(1000000.0 * (n1.cost - n2.cost));
-        }
-    };
 
     public MazeQueue() {
         q = new Node[0];
@@ -20,7 +14,6 @@ public class MazeQueue {
         System.arraycopy(q , 0 , tmp , 0 , q.length);
         tmp[q.length] = n;
         q = tmp;
-        sortAscending();
     }
 
     public Node pop() {
@@ -28,7 +21,6 @@ public class MazeQueue {
         Node[] tmp = new Node[q.length - 1];
         System.arraycopy(q , 1 , tmp , 0 , q.length - 1);
         q = tmp;
-        sortAscending();
         return retVal;
     }
 
@@ -44,7 +36,16 @@ public class MazeQueue {
         return q;
     }
 
-    private void sortAscending() {
-        Arrays.sort(q , nodeComp);
+    public void loadLowestCost() {
+        int min = 0;
+        for (int i = 0; i < q.length; i++) {
+            if (q[i].cost < q[min].cost) {
+                min = i;
+            }
+        }
+        Node swapTmp = q[0];
+        q[0] = q[min];
+        q[min] = swapTmp;
+        swapTmp = null;
     }
 }
