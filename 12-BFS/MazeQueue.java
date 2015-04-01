@@ -1,7 +1,6 @@
 public class MazeQueue {
 
     private Node[] q;
-    private boolean altercation;
 
     public MazeQueue() {
         q = new Node[0];

@@ -9,16 +9,13 @@ public class MazeQueue {
         public int compare(Node n1 , Node n2) {
             return (int)(1000000.0 * (n1.cost - n2.cost));
         }
-    }
+    };
 
     public MazeQueue() {
         q = new Node[0];
     }
 
     public void add(Node n) {
-        for (Node a : q) {
-            // Finish later
-        }
         Node[] tmp = new Node[q.length + 1];
         System.arraycopy(q , 0 , tmp , 0 , q.length);
         tmp[q.length] = n;
@@ -41,6 +38,10 @@ public class MazeQueue {
 
     public boolean empty() {
         return q.length == 0;
+    }
+
+    public Node[] toArray() {
+        return q;
     }
 
     private void sortAscending() {

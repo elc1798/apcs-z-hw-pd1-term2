@@ -49,6 +49,7 @@ public class AStarMaze {
     }
 
     public Node solve() {
+
         Node current = null;
         Node buffer = new Node(startCoor[0] , startCoor[1]);
         char ELEMENT = 'X';
@@ -63,30 +64,61 @@ public class AStarMaze {
         Node[] children = new Node[4];
 
         while (!open.empty()) {
+            // Get node with priority from queue
             current = open.pop();
+            closed.add(current);
+            // Exit immediately if out of bounds
             if (outOfBounds(current)) {
                 continue;
             }
+            // Load element for easy access
             ELEMENT = grid[current.r][current.c];
-            // Setup successors
-            children = new Node[]{
-                new Node(current.r - 1 , current.c) ,
-                new Node(current.r + 1 , current.c) , 
-                new Node(current.r , current.c - 1) ,
-                new Node(current.r , current.c + 1)
-            };
-            for (Node n : children) {
-                n.setParent(current);
-                if (grid[n.r][n.c] == GOAL) {
-                    finishNode = n;
-                    return n;
-                }
-                n.tailCost = current.tailCost + 1;
-                n.headCost = Math.sqrt(Math.pow(finishCoor[0] - n.r , 2) + Math.pow(finishCoor[1] - n.c , 2));
-                n.cost = n.tailCost + n.headCost;
+            // Set the current grid element to a visited element
+            grid[current.r][current.c] = VISITED;
+            if (ELEMENT == EMPTY || ELEMENT == START || ELEMENT == GOAL) {
+                // Setup successors
+                children = new Node[]{
+                    new Node(current.r - 1 , current.c) ,
+                    new Node(current.r + 1 , current.c) ,
+                    new Node(current.r , current.c - 1) ,
+                    new Node(current.r , current.c + 1)
+                };
+                // Check to see if successor should be added based on priority
+                for (Node n : children) {
+                    n.setParent(current);
+                    if (grid[n.r][n.c] == GOAL) {
+                        finishNode = n;
+                        return n;
+                    }
+                    n.tailCost = current.tailCost + 1;
+                    n.headCost = Math.sqrt(Math.pow(finishCoor[0] - n.r , 2) + Math.pow(finishCoor[1] - n.c , 2));
+                    n.cost = n.tailCost + n.headCost;
 
+                    boolean insert = true;
+                    for (Node a : open.toArray()) {
+                        if (a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                            insert = false;
+                            break;
+                        }
+                    }
+                    for (Node a : closed.toArray()) {
+                        if (!insert) {
+                            break;
+                        }
+                        if (a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                            insert = false;
+                            break;
+                        }
+                    }
+                    if (insert) {
+                        open.add(n);
+                    }
+                }
+            } else {
+                continue;
             }
         }
+        return null;
     }
 
     public void fancyPrint() {
