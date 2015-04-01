@@ -134,6 +134,10 @@ public class AStarMaze {
         char[][] board = grid;
         grid = clean;
         Node tmp = finishNode.getParent();
+        if (tmp == null) {
+            System.out.println("No solution");
+            return;
+        }
         while (tmp.getParent() != null) {
             grid[tmp.r][tmp.c] = ME;
             tmp = tmp.getParent();
