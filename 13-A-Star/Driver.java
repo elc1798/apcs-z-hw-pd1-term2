@@ -9,7 +9,7 @@ public class Driver {
 
         endTime = System.nanoTime() - startTime;
 
-        System.out.println("Solved in " + endTime + " nanoseconds.");
+        System.out.println("Solved in " + nanoToMillis(endTime) + " milliseconds.");
         maze1.printSolution();
         System.out.println();
 
@@ -20,7 +20,7 @@ public class Driver {
 
         endTime = System.nanoTime() - startTime;
 
-        System.out.println("Solved in " + endTime + " nanoseconds.");
+        System.out.println("Solved in " + nanoToMillis(endTime) + " milliseconds.");
         maze2.printSolution();
         System.out.println();
 
@@ -31,8 +31,16 @@ public class Driver {
 
         endTime = System.nanoTime() - startTime;
 
-        System.out.println("Solved in " + endTime + " nanoseconds.");
+        System.out.println("Solved in " + nanoToMillis(endTime) + " milliseconds.");
         maze3.printSolution();
         System.out.println();
+    }
+
+    private static String nanoToMillis(long nano) {
+        String tmp = Long.toString(nano);
+        while (tmp.length() < 6) {
+            tmp = "0" + tmp;
+        }
+        return tmp.substring(0 , tmp.length() - 6) + "." + tmp.substring(tmp.length() - 6);
     }
 }
