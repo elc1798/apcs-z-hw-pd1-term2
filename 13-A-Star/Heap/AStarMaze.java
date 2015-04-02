@@ -73,7 +73,7 @@ public class AStarMaze {
             if (SHOW_STEPS) {
                 sleepThenShow();
             }
-            // Get node with priority from queue
+            // Get node with priority from heap
             current = open.pop();
             closed.add(current);
             // Exit immediately if out of bounds
