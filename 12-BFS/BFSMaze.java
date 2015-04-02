@@ -118,6 +118,10 @@ public class BFSMaze {
     }
 
     public void printSolution() {
+        if (finishNode == null || finishNode.getParent() == null) {
+            System.out.println("No solution.");
+            return;
+        }
         char[][] board = grid;
         grid = clean;
         Node tmp = finishNode.getParent();

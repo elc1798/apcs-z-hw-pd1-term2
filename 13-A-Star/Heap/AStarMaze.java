@@ -154,12 +154,12 @@ public class AStarMaze {
     }
 
     public void printSolution() {
-        char[][] board = grid;
-        grid = clean;
         if (finishNode == null || finishNode.getParent() == null) {
             System.out.println("No solution");
             return;
         }
+        char[][] board = grid;
+        grid = clean;
         Node tmp = finishNode.getParent();
         while (tmp.getParent() != null) {
             grid[tmp.r][tmp.c] = ME;
