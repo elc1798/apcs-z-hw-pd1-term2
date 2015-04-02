@@ -96,7 +96,13 @@ public class BFSMaze {
     public void fancyPrint() {
         for (int i = 0; i < grid.length; i++) {
             for (int k = 0; k < grid[0].length; k++) {
-                System.out.print(grid[i][k] + " ");
+                if (grid[i][k] == ME || grid[i][k] == VISITED) {
+                    System.out.print("\033[1;31m" + grid[i][k] + " \033[m");
+                } else if (grid[i][k] == START || grid[i][k] == GOAL) {
+                    System.out.print("\033[1;32m" + grid[i][k] + " \033[m");
+                } else {
+                    System.out.print(grid[i][k] + " ");
+                }
             }
             System.out.print("\n");
         }
