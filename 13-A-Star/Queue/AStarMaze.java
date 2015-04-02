@@ -83,29 +83,35 @@ public class AStarMaze {
             // Load element for easy access
             ELEMENT = grid[current.r][current.c];
             // Set the current grid element to a visited element
-            grid[current.r][current.c] = VISITED;
+            if (ELEMENT == EMPTY) {
+                grid[current.r][current.c] = VISITED;
+            }
             if (ELEMENT == EMPTY || ELEMENT == START || ELEMENT == GOAL) {
                 // Setup successors
                 children = new Node[]{
-                    new Node(current.r - 1 , current.c) ,
-                    new Node(current.r + 1 , current.c) ,
-                    new Node(current.r , current.c - 1) ,
-                    new Node(current.r , current.c + 1)
+                        new Node(current.r - 1 , current.c) ,
+                        new Node(current.r + 1 , current.c) ,
+                        new Node(current.r , current.c - 1) ,
+                        new Node(current.r , current.c + 1)
                 };
                 // Check to see if successor should be added based on priority
                 for (Node n : children) {
+                    if (outOfBounds(n) || grid[n.r][n.c] == WALL || grid[n.r][n.c] == VISITED) {
+                        continue;
+                    }
                     n.setParent(current);
                     if (grid[n.r][n.c] == GOAL) {
                         finishNode = n;
                         return n;
                     }
-                    n.tailCost = current.tailCost + 1;
-                    n.headCost = Math.sqrt(Math.pow(finishCoor[0] - n.r , 2) + Math.pow(finishCoor[1] - n.c , 2));
+
+                    n.tailCost = current.tailCost + distance(current , n);
+                    n.headCost = (finishCoor[0] - n.r) * (finishCoor[0] - n.r) + (finishCoor[1] - n.c) * (finishCoor[1] - n.c);
                     n.cost = n.tailCost + n.headCost;
 
                     boolean insert = true;
                     for (Node a : open.toArray()) {
-                        if (a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                        if (a != null && a.r == n.r && a.c == n.c && a.cost < n.cost) {
                             insert = false;
                             break;
                         }
@@ -114,7 +120,7 @@ public class AStarMaze {
                         if (!insert) {
                             break;
                         }
-                        if (a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                        if (a != null && a.r == n.r && a.c == n.c && a.cost < n.cost) {
                             insert = false;
                             break;
                         }
