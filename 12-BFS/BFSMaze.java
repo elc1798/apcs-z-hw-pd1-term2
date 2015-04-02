@@ -65,8 +65,8 @@ public class BFSMaze {
                     current.r >= grid.length ||
                     current.c >= grid[0].length
                     ) {
-                        continue;
-                    }
+                continue;
+            }
             ELEMENT = grid[current.r][current.c];
             if (ELEMENT == GOAL) {
                 finishNode = current;
