@@ -71,11 +71,7 @@ public class AStarMaze {
 
         while (!open.empty()) {
             if (SHOW_STEPS) {
-                try {
-                    Thread.sleep(120);
-                } catch(Exception e) {}
-                System.out.println("\033\143");
-                fancyPrint();
+                sleepThenShow();
             }
             // Get node with priority from queue
             current = open.pop();
@@ -93,22 +89,28 @@ public class AStarMaze {
             if (ELEMENT == EMPTY || ELEMENT == START || ELEMENT == GOAL) {
                 // Setup successors
                 children = new Node[]{
-                    new Node(current.r - 1 , current.c) ,
-                    new Node(current.r + 1 , current.c) ,
-                    new Node(current.r , current.c - 1) ,
-                    new Node(current.r , current.c + 1)
+                        new Node(current.r - 1 , current.c) ,
+                        new Node(current.r + 1 , current.c) ,
+                        new Node(current.r , current.c - 1) ,
+                        new Node(current.r , current.c + 1)
                 };
                 // Check to see if successor should be added based on priority
                 for (Node n : children) {
+                    // If child is out of bounds or a wall or has been visited, do not process
+                    if (outOfBounds(n) || grid[n.r][n.c] == WALL || grid[n.r][n.c] == VISITED) {
+                        continue;
+                    }
                     n.setParent(current);
                     if (grid[n.r][n.c] == GOAL) {
                         finishNode = n;
                         return n;
                     }
+                    // Use costs to implement heuristics
                     n.tailCost = current.tailCost + distance(current , n);
                     n.headCost = (finishCoor[0] - n.r) * (finishCoor[0] - n.r) + (finishCoor[1] - n.c) * (finishCoor[1] - n.c);
                     n.cost = n.tailCost + n.headCost;
 
+                    // Check if the node is best case for current position
                     boolean insert = true;
                     for (Node a : open.toArray()) {
                         if (a != null && a.r == n.r && a.c == n.c && a.cost < n.cost) {
@@ -139,7 +141,13 @@ public class AStarMaze {
     public void fancyPrint() {
         for (int i = 0; i < grid.length; i++) {
             for (int k = 0; k < grid[0].length; k++) {
-                System.out.print(grid[i][k] + " ");
+                if (grid[i][k] == ME || grid[i][k] == VISITED) {
+                    System.out.print("\033[1;31m" + grid[i][k] + " \033[m");
+                } else if (grid[i][k] == START || grid[i][k] == GOAL) {
+                    System.out.print("\033[1;32m" + grid[i][k] + " \033[m");
+                } else {
+                    System.out.print(grid[i][k] + " ");
+                }
             }
             System.out.print("\n");
         }
@@ -148,21 +156,25 @@ public class AStarMaze {
     public void printSolution() {
         char[][] board = grid;
         grid = clean;
-        if (finishNode == null) {
+        if (finishNode == null || finishNode.getParent() == null) {
             System.out.println("No solution");
             return;
         }
         Node tmp = finishNode.getParent();
-        if (tmp == null) {
-            System.out.println("No solution");
-            return;
-        }
         while (tmp.getParent() != null) {
             grid[tmp.r][tmp.c] = ME;
             tmp = tmp.getParent();
         }
         fancyPrint();
         grid = board;
+    }
+
+    private void sleepThenShow() {
+        try {
+            Thread.sleep(120);
+        } catch(Exception e) {}
+        System.out.println("\033\143");
+        fancyPrint();
     }
 
     private boolean outOfBounds(Node n) {

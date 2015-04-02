@@ -2,7 +2,7 @@ public class Driver {
     public static void main(String[] args) {
         long startTime , endTime;
 
-        AStarMaze maze1 = new AStarMaze("MAZE1.dat" , true);
+        AStarMaze maze1 = new AStarMaze("MAZE1.dat");
         startTime = System.nanoTime();
 
         maze1.solve();
@@ -13,7 +13,7 @@ public class Driver {
         maze1.printSolution();
         System.out.println();
 
-        AStarMaze maze2 = new AStarMaze("MAZE2.dat" , true);
+        AStarMaze maze2 = new AStarMaze("MAZE2.dat");
         startTime = System.nanoTime();
 
         maze2.solve();
