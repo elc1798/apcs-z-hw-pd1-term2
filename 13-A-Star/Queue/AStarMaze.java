@@ -17,6 +17,7 @@ public class AStarMaze {
 
     private int[] startCoor;
     private int[] finishCoor;
+    private boolean SHOW_STEPS = false;
 
     private Node finishNode;
 
@@ -48,6 +49,11 @@ public class AStarMaze {
         }
     }
 
+    public AStarMaze(String fin , boolean show) {
+        this(fin);
+        SHOW_STEPS = show;
+    }
+
     public Node solve() {
 
         Node current = null;
@@ -64,6 +70,9 @@ public class AStarMaze {
         Node[] children = new Node[4];
 
         while (!open.empty()) {
+            if (SHOW_STEPS) {
+                sleepThenShow();
+            }
             // Get node with priority from queue
             current = open.pop();
             closed.add(current);
@@ -125,7 +134,13 @@ public class AStarMaze {
     public void fancyPrint() {
         for (int i = 0; i < grid.length; i++) {
             for (int k = 0; k < grid[0].length; k++) {
-                System.out.print(grid[i][k] + " ");
+                if (grid[i][k] == ME || grid[i][k] == VISITED) {
+                    System.out.print("\033[1;31m" + grid[i][k] + " \033[m");
+                } else if (grid[i][k] == START || grid[i][k] == GOAL) {
+                    System.out.print("\033[1;32m" + grid[i][k] + " \033[m");
+                } else {
+                    System.out.print(grid[i][k] + " ");
+                }
             }
             System.out.print("\n");
         }
@@ -147,7 +162,19 @@ public class AStarMaze {
         grid = board;
     }
 
+    private void sleepThenShow() {
+        try {
+            Thread.sleep(120);
+        } catch(Exception e) {}
+        System.out.println("\033\143");
+        fancyPrint();
+    }
+
     private boolean outOfBounds(Node n) {
         return n.r < 0 || n.c < 0 || n.r >= grid.length || n.c >= grid[0].length;
+    }
+
+    private double distance(Node n1 , Node n2) {
+        return (n1.r - n2.r) * (n1.r - n2.r) + (n1.c - n2.c) * (n1.c - n2.c);
     }
 }
