@@ -17,6 +17,7 @@ public class AStarMaze {
 
     private int[] startCoor;
     private int[] finishCoor;
+    private boolean SHOW_STEPS = false;
 
     private Node finishNode;
 
@@ -48,14 +49,19 @@ public class AStarMaze {
         }
     }
 
+    public AStarMaze(String fin , boolean show) {
+        this(fin);
+        SHOW_STEPS = show;
+    }
+
     public Node solve() {
 
         Node current = null;
         Node buffer = new Node(startCoor[0] , startCoor[1]);
         char ELEMENT = 'X';
-        MazeQueue open = new MazeQueue();
-        MazeQueue closed = new MazeQueue();
-        
+        MazeHeap open = new MazeHeap();
+        MazeHeap closed = new MazeHeap();
+
         buffer.tailCost = 0.0;
         buffer.headCost = 0.0;
         buffer.cost = buffer.tailCost + buffer.headCost;
@@ -64,6 +70,13 @@ public class AStarMaze {
         Node[] children = new Node[4];
 
         while (!open.empty()) {
+            if (SHOW_STEPS) {
+                try {
+                    Thread.sleep(120);
+                } catch(Exception e) {}
+                System.out.println("\033\143");
+                fancyPrint();
+            }
             // Get node with priority from queue
             current = open.pop();
             closed.add(current);
@@ -74,7 +87,9 @@ public class AStarMaze {
             // Load element for easy access
             ELEMENT = grid[current.r][current.c];
             // Set the current grid element to a visited element
-            grid[current.r][current.c] = VISITED;
+            if (ELEMENT == EMPTY) {
+                grid[current.r][current.c] = VISITED;
+            }
             if (ELEMENT == EMPTY || ELEMENT == START || ELEMENT == GOAL) {
                 // Setup successors
                 children = new Node[]{
@@ -90,13 +105,13 @@ public class AStarMaze {
                         finishNode = n;
                         return n;
                     }
-                    n.tailCost = current.tailCost + 1;
-                    n.headCost = Math.sqrt(Math.pow(finishCoor[0] - n.r , 2) + Math.pow(finishCoor[1] - n.c , 2));
+                    n.tailCost = current.tailCost + distance(current , n);
+                    n.headCost = (finishCoor[0] - n.r) * (finishCoor[0] - n.r) + (finishCoor[1] - n.c) * (finishCoor[1] - n.c);
                     n.cost = n.tailCost + n.headCost;
 
                     boolean insert = true;
                     for (Node a : open.toArray()) {
-                        if (a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                        if (a != null && a.r == n.r && a.c == n.c && a.cost < n.cost) {
                             insert = false;
                             break;
                         }
@@ -105,7 +120,7 @@ public class AStarMaze {
                         if (!insert) {
                             break;
                         }
-                        if (a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                        if (a != null && a.r == n.r && a.c == n.c && a.cost < n.cost) {
                             insert = false;
                             break;
                         }
@@ -117,7 +132,6 @@ public class AStarMaze {
             } else {
                 continue;
             }
-            open.loadLowestCost();
         }
         return null;
     }
@@ -134,6 +148,10 @@ public class AStarMaze {
     public void printSolution() {
         char[][] board = grid;
         grid = clean;
+        if (finishNode == null) {
+            System.out.println("No solution");
+            return;
+        }
         Node tmp = finishNode.getParent();
         if (tmp == null) {
             System.out.println("No solution");
@@ -149,5 +167,9 @@ public class AStarMaze {
 
     private boolean outOfBounds(Node n) {
         return n.r < 0 || n.c < 0 || n.r >= grid.length || n.c >= grid[0].length;
+    }
+
+    private double distance(Node n1 , Node n2) {
+        return (n1.r - n2.r) * (n1.r - n2.r) + (n1.c - n2.c) * (n1.c - n2.c);
     }
 }
