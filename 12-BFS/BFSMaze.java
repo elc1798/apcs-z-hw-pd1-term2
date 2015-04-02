@@ -20,6 +20,7 @@ public class BFSMaze {
     private int[] finishCoor;
 
     private Node finishNode;
+    private boolean SHOW_STEPS = false;
 
     public BFSMaze(String fin) {
         try {
@@ -50,7 +51,15 @@ public class BFSMaze {
         queue = new MazeQueue();
     }
 
+    public BFSMaze(String fin , boolean show) {
+        this(fin);
+        SHOW_STEPS = show;
+    }
+
     public Node solve() {
+        if (SHOW_STEPS) {
+            sleepThenShow();
+        }
         Node current = null;
         Node buffer = new Node(startCoor[0] , startCoor[1]);
         char ELEMENT = ' ';
@@ -118,5 +127,13 @@ public class BFSMaze {
         }
         fancyPrint();
         grid = board;
+    }
+
+    private void sleepThenShow() {
+        try {
+            Thread.sleep(120);
+        } catch(Exception e) {}
+        System.out.println("\033\143");
+        fancyPrint();
     }
 }
