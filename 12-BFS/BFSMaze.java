@@ -106,11 +106,11 @@ public class BFSMaze {
         for (int i = 0; i < grid.length; i++) {
             for (int k = 0; k < grid[0].length; k++) {
                 if (grid[i][k] == ME || grid[i][k] == VISITED) {
-                    System.out.print("\033[1;31m" + grid[i][k] + " \033[m");
+                    System.out.print("\033[1;31m" + grid[i][k] + "\033[m");
                 } else if (grid[i][k] == START || grid[i][k] == GOAL) {
-                    System.out.print("\033[1;32m" + grid[i][k] + " \033[m");
+                    System.out.print("\033[1;32m" + grid[i][k] + "\033[m");
                 } else {
-                    System.out.print(grid[i][k] + " ");
+                    System.out.print(grid[i][k]);
                 }
             }
             System.out.print("\n");

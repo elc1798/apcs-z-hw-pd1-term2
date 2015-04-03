@@ -39,6 +39,16 @@ public class Driver {
         System.out.println("Solved in " + nanoToMillis(endTime) + " milliseconds.");
         maze3.printSolution();
         System.out.println();
+
+        BFSMaze maze4 = new BFSMaze("MAZE4.dat");
+        startTime = System.nanoTime();
+
+        maze4.solve();
+        endTime = System.nanoTime() - startTime;
+
+        System.out.println("Solved in " + nanoToMillis(endTime) + " milliseconds.");
+        maze4.printSolution();
+        System.out.println();
     }
 
     private static String nanoToMillis(long nano) {
