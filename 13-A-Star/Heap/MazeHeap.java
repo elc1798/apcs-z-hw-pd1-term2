@@ -45,8 +45,11 @@ public class MazeHeap {
         int child;
         for (/* No initializer */ ; 2 * index <= size ; index = child) {
             child = getLeftChild(index);
-            if (child != size && q[child].compareTo(q[getRightChild(index)]) > 0) {
-                child = getRightChild(index);
+            if (child != size && q[child].compareTo(q[child + 1]) > 0) {
+                child++;
+            }
+            if (tmp.compareTo(q[child]) > 0) {
+                q[index] = q[child];
             } else {
                 break;
             }
