@@ -1,47 +1,47 @@
 public class Node<E> {
 
-    private E data;
+    private int data;
 
-    private Node<E> left , right;
-    private Node<E> parent;
+    private Node left , right;
+    private Node parent;
 
     public Node() {
-        data = null;
+        data = 0;
 
         left = null;
         right = null;
         parent = null;
     }
 
-    public Node(E s) {
-        data = s;
+    public Node(int i) {
+        data = i;
 
         left = null;
         right = null;
         parent = null;
     }
 
-    public void setData(E s) {
-        data = s;
+    public void setData(int i) {
+        data = i;
     }
 
-    public E getData() {
+    public int getData() {
         return data;
     }
 
-    public void setLeft(Node<E> n) {
+    public void setLeft(Node n) {
         left = n;
     }
 
-    public void setRight(Node<E> n) {
+    public void setRight(Node n) {
         right = n;
     }
 
-    public Node<E> getLeft() {
+    public Node getLeft() {
         return left;
     }
 
-    public Node<E> getRight() {
+    public Node getRight() {
         return right;
     }
 
@@ -49,7 +49,7 @@ public class Node<E> {
         return ""+data;
     }
 
-    public void setParent(Node<E> n) {
+    public void setParent(Node n) {
         parent = n;
     }
 
