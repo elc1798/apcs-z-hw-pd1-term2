@@ -60,7 +60,7 @@ public class AStarMaze {
         Node buffer = new Node(startCoor[0] , startCoor[1]);
         char ELEMENT = 'X';
         MazeHeap open = new MazeHeap();
-        MazeHeap closed = new MazeHeap();
+        double[][] closed = new double[grid.length][grid[0].length];
 
         buffer.tailCost = 0.0;
         buffer.headCost = 0.0;
@@ -69,13 +69,21 @@ public class AStarMaze {
 
         Node[] children = new Node[4];
 
+        for (int r = 0; r < closed.length; r++) {
+            for (int c = 0; c < closed[r].length; c++) {
+                closed[r][c] = -1.0;
+            }
+        }
+
         while (!open.empty()) {
             if (SHOW_STEPS) {
                 sleepThenShow();
             }
             // Get node with priority from heap
             current = open.pop();
-            closed.add(current);
+            if (closed[current.r][current.c] < 0.0 || closed[current.r][current.c] > current.cost) {
+                closed[current.r][current.c] = current.cost;
+            }
             // Exit immediately if out of bounds
             if (outOfBounds(current)) {
                 continue;
@@ -118,13 +126,15 @@ public class AStarMaze {
                             break;
                         }
                     }
-                    for (Node a : closed.toArray()) {
-                        if (!insert) {
-                            break;
-                        }
-                        if (a != null && a.r == n.r && a.c == n.c && a.cost < n.cost) {
+                    if (insert) {
+                        if (closed[n.r][n.c] < 0.0) {
+                            insert = true; // assert
+                            closed[n.r][n.c] = n.cost;
+                        } else if (closed[n.r][n.c] > n.cost) {
+                            insert = true; // assert
+                            closed[n.r][n.c] = n.cost;
+                        } else { // if closed[n.r][n.c] < n.cost, then n.cost is not min, and should not be altered or added
                             insert = false;
-                            break;
                         }
                     }
                     if (insert) {
